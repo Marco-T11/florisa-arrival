@@ -1,0 +1,930 @@
+/* ============================================
+   FLORISA MOUNTAIN CHALET - Arrival Guide
+   ============================================ */
+
+:root {
+  --cream: #F5F0EB;
+  --cream-dark: #EDE6DE;
+  --charcoal: #2C2C2C;
+  --charcoal-light: #3D3D3D;
+  --olive: #6B7B5E;
+  --olive-light: #8A9A7C;
+  --warm-gray: #9B9590;
+  --gold: #C4A882;
+  --white: #FAFAF8;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+}
+
+/* Reset & Base */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--charcoal);
+  background: var(--white);
+  line-height: 1.7;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- Navigation ---- */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 3rem;
+  transition: background 0.4s, padding 0.4s, box-shadow 0.4s;
+}
+
+.nav.scrolled {
+  background: rgba(250, 250, 248, 0.95);
+  backdrop-filter: blur(12px);
+  padding: 1rem 3rem;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+}
+
+.nav-brand {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  color: white;
+  transition: color 0.4s;
+}
+
+.nav.scrolled .nav-brand {
+  color: var(--charcoal);
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: rgba(255,255,255,0.85);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: color 0.3s;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.3s;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav.scrolled .nav-links a {
+  color: var(--charcoal);
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 101;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background: white;
+  transition: background 0.3s, transform 0.3s, opacity 0.3s;
+}
+
+.nav.scrolled .nav-toggle span {
+  background: var(--charcoal);
+}
+
+/* ---- Hero ---- */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #4a5a3e 0%, #6B7B5E 30%, #8a9a7c 60%, #a8b89a 100%);
+  overflow: hidden;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.35) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: white;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+  opacity: 0.8;
+}
+
+.hero-logo-svg {
+  width: 80px;
+  height: 60px;
+  margin: 0 auto 1rem;
+  display: block;
+}
+
+.hero-logo h1 {
+  font-family: var(--font-serif);
+  font-size: 3.5rem;
+  font-weight: 300;
+  letter-spacing: 0.4em;
+  margin-bottom: 0.3rem;
+}
+
+.hero-subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.5em;
+  font-weight: 300;
+  opacity: 0.8;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.hero-scroll p {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin-bottom: 0.8rem;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: rgba(255,255,255,0.4);
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.scroll-line::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  animation: scrollDown 2s ease-in-out infinite;
+}
+
+@keyframes scrollDown {
+  0% { top: -100%; }
+  100% { top: 100%; }
+}
+
+/* ---- Sections ---- */
+.section {
+  padding: 7rem 2rem;
+}
+
+.section-light {
+  background: var(--cream);
+}
+
+.section-dark {
+  background: var(--charcoal);
+  color: white;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.container-narrow {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.section-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--olive);
+  margin-bottom: 1rem;
+}
+
+.section-eyebrow.light {
+  color: var(--gold);
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: 2.8rem;
+  font-weight: 300;
+  line-height: 1.2;
+  margin-bottom: 2rem;
+  letter-spacing: 0.02em;
+}
+
+.section-title.light {
+  color: white;
+}
+
+.section-body {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--charcoal-light);
+  max-width: 600px;
+}
+
+.section-body.light {
+  color: rgba(255,255,255,0.8);
+}
+
+.section-body + .section-body {
+  margin-top: 1rem;
+}
+
+/* ---- Full Image Sections ---- */
+.section-fullimage {
+  position: relative;
+  height: 70vh;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, #5a6a4e 0%, #7a8a6e 50%, #94a486 100%);
+  overflow: hidden;
+}
+
+.fullimage-apartment {
+  background: linear-gradient(160deg, #3d3530 0%, #5a4e44 50%, #7a6e64 100%);
+}
+
+.fullimage-hiking {
+  background: linear-gradient(160deg, #4a6a5e 0%, #6a8a7e 50%, #8aaa9e 100%);
+}
+
+.fullimage-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.25);
+}
+
+.fullimage-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 2rem;
+  max-width: 700px;
+}
+
+/* ---- Info Grid ---- */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.info-card {
+  background: var(--white);
+  padding: 2.5rem 2rem;
+  border-radius: 2px;
+  transition: transform 0.3s;
+}
+
+.info-card:hover {
+  transform: translateY(-3px);
+}
+
+.info-icon {
+  width: 28px;
+  height: 28px;
+  color: var(--olive);
+  margin-bottom: 1.2rem;
+}
+
+.info-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.info-card h3 {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 0.8rem;
+}
+
+.info-card p {
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--warm-gray);
+}
+
+.info-detail {
+  margin-top: 0.8rem;
+  color: var(--charcoal) !important;
+  font-weight: 400;
+}
+
+.info-note {
+  margin-top: 0.8rem;
+  font-size: 0.8rem !important;
+  font-style: italic;
+}
+
+/* ---- Steps ---- */
+.steps {
+  margin-top: 3rem;
+}
+
+.step {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.step:last-child {
+  border-bottom: none;
+}
+
+.step-number {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--gold);
+  flex-shrink: 0;
+  width: 50px;
+}
+
+.step-content h3 {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 0.6rem;
+}
+
+.step-content p {
+  font-size: 0.92rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.7);
+}
+
+/* ---- Check-In ---- */
+.checkin-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin: 2.5rem 0;
+}
+
+.checkin-card {
+  background: var(--white);
+  padding: 2.5rem 2rem;
+  text-align: center;
+  border-radius: 2px;
+}
+
+.checkin-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--olive);
+  margin-bottom: 0.5rem;
+}
+
+.checkin-time {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 400;
+  margin-bottom: 0.3rem;
+}
+
+.checkin-note {
+  font-size: 0.85rem;
+  color: var(--warm-gray);
+}
+
+.access-info {
+  margin-top: 2rem;
+}
+
+/* ---- Elegant List ---- */
+.elegant-list {
+  list-style: none;
+  margin-top: 1rem;
+}
+
+.elegant-list li {
+  padding: 0.6rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+  font-size: 0.95rem;
+  color: var(--charcoal-light);
+}
+
+.elegant-list.light li {
+  color: rgba(255,255,255,0.75);
+}
+
+.elegant-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 6px;
+  height: 1px;
+  background: var(--olive);
+}
+
+.elegant-list.light li::before {
+  background: var(--gold);
+}
+
+/* ---- Suites Grid ---- */
+.suites-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.suite-card {
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 2rem;
+  text-align: center;
+  transition: background 0.3s;
+  backdrop-filter: blur(4px);
+  background: rgba(255,255,255,0.05);
+}
+
+.suite-card:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.suite-name {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: white;
+  margin-bottom: 0.3rem;
+}
+
+.suite-floor {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+
+/* ---- Amenities ---- */
+.amenities-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  margin-top: 3rem;
+  background: var(--cream-dark);
+}
+
+.amenity {
+  background: var(--white);
+  padding: 2.5rem 2rem;
+}
+
+.amenity h3 {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 0.8rem;
+}
+
+.amenity p {
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--warm-gray);
+}
+
+/* ---- Wellness ---- */
+.wellness-content {
+  margin-top: 2rem;
+}
+
+.wellness-block {
+  margin-bottom: 3rem;
+}
+
+.wellness-block:last-child {
+  margin-bottom: 0;
+}
+
+.wellness-block h3 {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.wellness-block p {
+  font-size: 0.92rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.7);
+}
+
+.temp-grid {
+  display: flex;
+  gap: 2rem;
+  margin: 1.5rem 0;
+}
+
+.temp-card {
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 1.5rem 2rem;
+  text-align: center;
+}
+
+.temp-season {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.4rem;
+}
+
+.temp-value {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: white;
+}
+
+.wellness-note {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.5);
+  margin-top: 0.5rem;
+}
+
+/* ---- Ski ---- */
+.ski-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2.5rem;
+}
+
+.ski-option {
+  background: var(--white);
+  padding: 2.5rem 2rem;
+  border-radius: 2px;
+}
+
+.ski-option h3 {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 0.3rem;
+}
+
+.ski-distance {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--olive);
+  margin-bottom: 1rem;
+}
+
+.ski-option p:last-child {
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--warm-gray);
+}
+
+.price-note {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border-left: 2px solid var(--olive);
+}
+
+.price-note p {
+  font-size: 0.92rem;
+  color: var(--charcoal-light);
+}
+
+/* ---- Hiking ---- */
+.hike-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.hike-card {
+  background: var(--white);
+  padding: 2.5rem 2rem;
+  border-radius: 2px;
+}
+
+.hike-header h3 {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 0.3rem;
+}
+
+.hike-start {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--olive);
+  margin-bottom: 1.5rem;
+}
+
+.hike-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.hike-stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--warm-gray);
+}
+
+.stat-value {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+.hike-desc {
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--warm-gray);
+}
+
+/* ---- Checkout ---- */
+.checkout-steps {
+  margin: 3rem 0;
+}
+
+.checkout-item {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.2rem 0;
+  border-bottom: 1px solid var(--cream-dark);
+}
+
+.checkout-item:last-child {
+  border-bottom: none;
+}
+
+.checkout-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  color: var(--olive);
+}
+
+.checkout-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.checkout-item p {
+  font-size: 0.95rem;
+}
+
+.farewell {
+  margin-top: 3rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--cream-dark);
+  text-align: center;
+}
+
+.farewell p {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--charcoal-light);
+}
+
+.farewell-signature {
+  margin-top: 1rem;
+  font-style: italic;
+  color: var(--olive) !important;
+}
+
+/* ---- Footer ---- */
+.footer {
+  background: var(--charcoal);
+  color: rgba(255,255,255,0.5);
+  padding: 4rem 2rem;
+}
+
+.footer-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-name {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  color: white;
+}
+
+.footer-tagline {
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  margin-top: 0.3rem;
+}
+
+.footer-address p {
+  font-size: 0.8rem;
+  text-align: right;
+  line-height: 1.6;
+}
+
+/* ---- Animations ---- */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 900px) {
+  .info-grid,
+  .amenities-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .section-title {
+    font-size: 2.2rem;
+  }
+
+  .hero-logo h1 {
+    font-size: 2.5rem;
+  }
+
+  .nav {
+    padding: 1.2rem 1.5rem;
+  }
+
+  .section {
+    padding: 5rem 1.5rem;
+  }
+}
+
+@media (max-width: 680px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100vh;
+    background: var(--charcoal);
+    flex-direction: column;
+    padding: 5rem 2.5rem;
+    gap: 0;
+    transition: right 0.4s ease;
+  }
+
+  .nav-links.open {
+    right: 0;
+  }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.7) !important;
+    font-size: 0.85rem;
+    display: block;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .nav-toggle.open span:nth-child(1) {
+    transform: rotate(45deg) translate(4px, 4px);
+  }
+  .nav-toggle.open span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-toggle.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(4px, -4px);
+  }
+
+  .info-grid,
+  .amenities-grid,
+  .ski-options,
+  .hike-grid,
+  .suites-grid,
+  .checkin-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-title {
+    font-size: 1.9rem;
+  }
+
+  .hero-logo h1 {
+    font-size: 2rem;
+    letter-spacing: 0.3em;
+  }
+
+  .hero-subtitle {
+    letter-spacing: 0.3em;
+    font-size: 0.65rem;
+  }
+
+  .step {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  .footer-address p {
+    text-align: center;
+  }
+
+  .temp-grid {
+    flex-direction: column;
+  }
+}
