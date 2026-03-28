@@ -161,27 +161,13 @@ body {
   opacity: 0.8;
 }
 
-.hero-logo-svg {
-  width: 80px;
-  height: 60px;
-  margin: 0 auto 1rem;
+.hero-logo-img {
+  max-width: 340px;
+  width: 80%;
+  height: auto;
   display: block;
-}
-
-.hero-logo h1 {
-  font-family: var(--font-serif);
-  font-size: 3.5rem;
-  font-weight: 300;
-  letter-spacing: 0.4em;
-  margin-bottom: 0.3rem;
-}
-
-.hero-subtitle {
-  font-family: var(--font-sans);
-  font-size: 0.75rem;
-  letter-spacing: 0.5em;
-  font-weight: 300;
-  opacity: 0.8;
+  margin: 0 auto;
+  filter: brightness(1);
 }
 
 .hero-scroll {
@@ -875,8 +861,8 @@ body {
     font-size: 2.2rem;
   }
 
-  .hero-logo h1 {
-    font-size: 2.5rem;
+  .hero-logo-img {
+    max-width: 280px;
   }
 
   .nav {
@@ -942,14 +928,8 @@ body {
     font-size: 1.9rem;
   }
 
-  .hero-logo h1 {
-    font-size: 2rem;
-    letter-spacing: 0.3em;
-  }
-
-  .hero-subtitle {
-    letter-spacing: 0.3em;
-    font-size: 0.65rem;
+  .hero-logo-img {
+    max-width: 220px;
   }
 
   .step {
